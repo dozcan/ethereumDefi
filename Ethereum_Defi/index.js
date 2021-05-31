@@ -31,7 +31,7 @@ app.post('/AddressSituation',function(req,res){
     {
       console.log("sds",req.body);
       let ethereum = JSON.stringify(req.body.address);
-      console.log("ethereum","ethereum");
+      console.log("ethereum",ethereum);
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
         from: ethereum.selectedAddress, 
         to:TokenAddress
