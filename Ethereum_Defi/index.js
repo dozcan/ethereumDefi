@@ -55,7 +55,7 @@ app.post('/AddressSituation',function(req,res){
         to:DistributionAddress
       });
 
-          console.log("3");
+          console.log("3",ethereum.selectedAddress);
       var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});
             console.log("4");
       var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum.selectedAddress});
