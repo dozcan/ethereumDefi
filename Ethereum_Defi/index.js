@@ -9,20 +9,7 @@ var TokenAddress  = "0x95b03895A0c58A868324c2098a89178679EFAE48"
 var LockAddress  = "0xd431187ff85b1200cC2B35133438a09C103BF932"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
-	var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-		from: ethereum.selectedAddress, 
-		to:TokenAddress
-	});
 
-	var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-		from: ethereum.selectedAddress, 
-		to:LockAddress
-	});
-
-	var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-		from: ethereum.selectedAddress, 
-		to:DistributionAddress
-	});
 
 var express = require('express');
 const app = express();
@@ -43,6 +30,22 @@ app.post('/AddressSituation',function(req,res){
     try
     {
       let ethereum = JSON.stringify(req.body.address);
+      var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
+        from: ethereum.selectedAddress, 
+        to:TokenAddress
+      });
+    
+      var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
+        from: ethereum.selectedAddress, 
+        to:LockAddress
+      });
+    
+      var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
+        from: ethereum.selectedAddress, 
+        to:DistributionAddress
+      });
+
+    
       var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});
       var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum.selectedAddress});
       var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:ethereum.selectedAddress});
@@ -89,6 +92,23 @@ app.post('/Lock',function(req,res){
             let lockAmount = 0;
 
             try{
+
+              var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
+                from: ethereum.selectedAddress, 
+                to:TokenAddress
+              });
+            
+              var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
+                from: ethereum.selectedAddress, 
+                to:LockAddress
+              });
+            
+              var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
+                from: ethereum.selectedAddress, 
+                to:DistributionAddress
+              });
+
+
               var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});           
               if(tierIndex === 1 && bakiye < 150){
                 key = ["account","result","transactions"];
@@ -216,6 +236,21 @@ app.post('/ClaimInformation',function(req,res){
             let result;
             try{
    
+              var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
+                from: ethereum.selectedAddress, 
+                to:TokenAddress
+              });
+            
+              var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
+                from: ethereum.selectedAddress, 
+                to:LockAddress
+              });
+            
+              var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
+                from: ethereum.selectedAddress, 
+                to:DistributionAddress
+              });
+
               let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:ethereum.selectedAddress});
               let start = new Date(canBeClaimableDate*1000);
               var end = Date.now()
@@ -294,6 +329,21 @@ app.post('/ClaimFirst',function(req,res){
     try{
             let ethereum = JSON.stringify(req.body.address);
             try{
+
+              var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
+                from: ethereum.selectedAddress, 
+                to:TokenAddress
+              });
+            
+              var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
+                from: ethereum.selectedAddress, 
+                to:LockAddress
+              });
+            
+              var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
+                from: ethereum.selectedAddress, 
+                to:DistributionAddress
+              });
    
               var claimOP =  await MyContractLock.methods.claim().encodeABI();
               let paramClaim= {
@@ -344,6 +394,21 @@ app.post('/ClaimSecond',function(req,res){
             let ethereum = JSON.stringify(req.body.address);
             let result;
             try{
+
+              var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
+                from: ethereum.selectedAddress, 
+                to:TokenAddress
+              });
+            
+              var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
+                from: ethereum.selectedAddress, 
+                to:LockAddress
+              });
+            
+              var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
+                from: ethereum.selectedAddress, 
+                to:DistributionAddress
+              });
    
               let getDurationOflockTimeforPerson =  await MyContractLock.methods.getDurationOflockTimeforPerson().call({from:ethereum.selectedAddress});
               let idoTime = await MyContractDistribution.methods.canRigtForDistribution().call({from:ethereum.selectedAddress});
@@ -413,13 +478,6 @@ app.post('/ClaimSecond',function(req,res){
   set();    
 });
 
-
-module.exports = {
-  AccountCreate,
-  DeployContract,
-  Identity,
-  getIdentity
-}
 
 app.listen(6000,()=>{
   console.log(6000+"listening");
