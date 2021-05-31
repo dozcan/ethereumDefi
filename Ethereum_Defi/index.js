@@ -11,9 +11,15 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 
 
-var express = require('express');
-const app = express();
 var bodyParser = require('body-parser');
+//app.use(bodyParser.urlencoded({extended:true }));
+app.use(cors());
+//gas limit ve gas price a bağlı olarak block boyutu ve blok içerisine sığacak tra:nsaction sayısını
+//değiştirebiliriz
+// 1. çözüm verinin hashlenip verinin datasının dışarıda tutulup eşleştirme yapılması.
+// 2. çözüm veri boyutunun küçültülmesi
+// 3. çözüm solidty kodunda byte veri kullanabilmek.
+app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 let errorMessage;
 let errorCode;
 var rawResponseObject;
