@@ -9,7 +9,8 @@ var TokenAddress  = "0x95b03895A0c58A868324c2098a89178679EFAE48"
 var LockAddress  = "0xd431187ff85b1200cC2B35133438a09C103BF932"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
-
+var express = require('express');
+const app = express();
 
 var bodyParser = require('body-parser');
 //app.use(bodyParser.urlencoded({extended:true }));
