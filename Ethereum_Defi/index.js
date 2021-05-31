@@ -14,7 +14,7 @@ const app = express();
 
 var bodyParser = require('body-parser');
 //app.use(bodyParser.urlencoded({extended:true }));
-app.use(cors());
+
 //gas limit ve gas price a bağlı olarak block boyutu ve blok içerisine sığacak tra:nsaction sayısını
 //değiştirebiliriz
 // 1. çözüm verinin hashlenip verinin datasının dışarıda tutulup eşleştirme yapılması.
