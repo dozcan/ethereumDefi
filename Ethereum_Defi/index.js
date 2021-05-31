@@ -13,7 +13,7 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 var express = require('express');
 const app = express();
-
+var bodyParser = require('body-parser');
 let errorMessage;
 let errorCode;
 var rawResponseObject;
