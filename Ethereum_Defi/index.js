@@ -28,25 +28,31 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
+      console.log("sds","wew");
       let ethereum = JSON.stringify(req.body.address);
+      console.log("ethereum","ethereum");
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
         from: ethereum.selectedAddress, 
         to:TokenAddress
       });
+      
+      console.log("1");
     
       var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
         from: ethereum.selectedAddress, 
         to:LockAddress
       });
-    
+          console.log("2");
       var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
         from: ethereum.selectedAddress, 
         to:DistributionAddress
       });
 
-    
+          console.log("3");
       var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});
+            console.log("4");
       var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum.selectedAddress});
+            console.log("5");
       var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:ethereum.selectedAddress});
       var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:ethereum.selectedAddress});
       
@@ -64,6 +70,7 @@ app.post('/AddressSituation',function(req,res){
     }
     catch(err)
     {
+      console.log("err",err);
       errorCode = requestTypeError.account_create;
       errorMessage =  helper.error(errorCode,err);
       response = responseMaker.responseErrorMaker(errorCode,errorMessage);
