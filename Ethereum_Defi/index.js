@@ -30,32 +30,32 @@ app.post('/AddressSituation',function(req,res){
     try
     {
       console.log("sds",req.body);
-      let ethereum = JSON.stringify(req.body.address);
+      let ethereum = JSON.stringify(req.body.address.selectedAddress);
       console.log("ethereum",ethereum);
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-        from: ethereum.selectedAddress, 
+        from: ethereum, 
         to:TokenAddress
       });
       
       console.log("1");
     
       var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-        from: ethereum.selectedAddress, 
+        from: ethereum, 
         to:LockAddress
       });
           console.log("2");
       var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-        from: ethereum.selectedAddress, 
+        from: ethereum, 
         to:DistributionAddress
       });
 
-          console.log("3",ethereum.selectedAddress);
-      var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});
+          console.log("3",ethereum);
+      var bakiye =  await MyContractToken.methods.balanceOf(ethereum).call({from:ethereum});
             console.log("4");
-      var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum.selectedAddress});
+      var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum});
             console.log("5");
-      var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:ethereum.selectedAddress});
-      var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:ethereum.selectedAddress});
+      var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:ethereum});
+      var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:ethereum});
       
       let obj = {
          "nest1":[Nest1[0],Nest1[1],Nest1[2]],
@@ -64,7 +64,7 @@ app.post('/AddressSituation',function(req,res){
       }
 
       key = ["account","balance","situation"];
-      value = [ethereum.selectedAddress,bakiye,obj];
+      value = [ethereum,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
       res.send(response);
