@@ -13,7 +13,6 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 var express = require('express');
 const app = express();
-app.use(cors());
 
 let errorMessage;
 let errorCode;
