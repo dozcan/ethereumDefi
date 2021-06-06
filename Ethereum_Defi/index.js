@@ -89,27 +89,25 @@ app.post('/Lock',function(req,res){
   var set = async() => {
     try{
 
-            let nestIndex = JSON.stringify(req.body.nestIndex);
-            let tierIndex = JSON.stringify(req.body.tierIndex);
-            let ethereum = JSON.stringify(req.body.address);
-            ethereum = JSON.parse(ethereum);
-            let lockAmount = 0;
-            console.log(nestIndex,tierIndex,ethereum);
+      let body = JSON.stringify(req.body.address);
+      let ethereum = JSON.parse(body);
+      let personAddress = ethereum.selectedAddress;
+      
 
             try{
 
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:TokenAddress
               });
             
               var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:LockAddress
               });
             
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-                from: ethereum.selectedAddress, 
+                from:personAddress, 
                 to:DistributionAddress
               });
 
@@ -262,7 +260,7 @@ app.post('/ClaimInformation',function(req,res){
                 from: ethereum.selectedAddress, 
                 to:DistributionAddress
               });
-            
+           
               let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:ethereum.selectedAddress});
               console.log("canBeClaimableDate",canBeClaimableDate);
               let start = new Date(canBeClaimableDate*1000);
