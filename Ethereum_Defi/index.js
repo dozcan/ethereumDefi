@@ -245,6 +245,7 @@ app.post('/ClaimInformation',function(req,res){
             let body = JSON.stringify(req.body.address);
             let ethereum = JSON.parse(body);
             let result;
+            console.log("1",ethereum.selectedAddress)
             try{
    
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
@@ -261,7 +262,7 @@ app.post('/ClaimInformation',function(req,res){
                 from: ethereum.selectedAddress, 
                 to:DistributionAddress
               });
-
+            
               let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:ethereum.selectedAddress});
               console.log("canBeClaimableDate",canBeClaimableDate);
               let start = new Date(canBeClaimableDate*1000);
