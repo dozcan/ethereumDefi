@@ -244,6 +244,7 @@ app.post('/ClaimInformation',function(req,res){
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
+      let result;
 
             try{
              console.log("1")
