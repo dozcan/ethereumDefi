@@ -87,15 +87,13 @@ app.post('/AddressSituation',function(req,res){
 app.post('/Lock',function(req,res){
 
   var set = async() => {
-    try{
-
-      let body = JSON.stringify(req.body.address);
-      let ethereum = JSON.parse(body);
-      let personAddress = ethereum.selectedAddress;
-      
+ 
 
             try{
-              console.log("1")
+              
+              let body = JSON.stringify(req.body.address);
+              let ethereum = JSON.parse(body);
+              let personAddress = ethereum.selectedAddress;
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
                 from: personAddress, 
                 to:TokenAddress
@@ -218,14 +216,7 @@ app.post('/Lock',function(req,res){
                 res.send(response);
             }
                        
-    }
-    catch(err)
-    {
-      errorCode = requestTypeError.identity;
-      errorMessage = helper.error(errorCode,err);
-      response = responseMaker.responseErrorMaker(errorCode,errorMessage);
-      res.send(response);
-    }
+    
   }
   set();    
 });
@@ -240,14 +231,14 @@ app.post('/Lock',function(req,res){
 app.post('/ClaimInformation',function(req,res){
 
   var set = async() => {
-    try{
-      let body = JSON.stringify(req.body.address);
-      let ethereum = JSON.parse(body);
-      let personAddress = ethereum.selectedAddress;
-      let result;
-
+   
+    
             try{
-             console.log("1")
+              let body = JSON.stringify(req.body.address);
+              let ethereum = JSON.parse(body);
+              let personAddress = ethereum.selectedAddress;
+              let result;
+        
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
                 from: personAddress, 
                 to:TokenAddress
@@ -313,7 +304,7 @@ app.post('/ClaimInformation',function(req,res){
             } 
             catch(err){
               console.log("err1",err)
-              result.message= "address has not rights for claim"
+              result.message= err;
               result.success = false;
               key = ["account","result"];
               value = [personAddress,result];
@@ -323,15 +314,6 @@ app.post('/ClaimInformation',function(req,res){
                                
             }
                        
-    }
-    catch(err)
-    {
-      console.log("err2",err)
-      errorCode = requestTypeError.identity;
-      errorMessage = helper.error(errorCode,err);
-      response = responseMaker.responseErrorMaker(errorCode,errorMessage);
-      res.send(response);
-    }
   }
   set();    
 });
