@@ -116,15 +116,7 @@ app.post('/Lock',function(req,res){
 
               var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});           
               bakiye = Number.parseInt(bakiye);
-              console.log("bakiye",bakiye,tierIndex);
-              if(bakiye === 0){
-                key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"zero balance is not enough for any tier",[]];
-                rawResponseObject = responseMaker.createResponse(key,value);
-                response = responseMaker.responseMaker(rawResponseObject);
-                res.send(response);
-              }
-              else if(tierIndex === 1 && bakiye < 150){
+              if(tierIndex === 1 && bakiye < 150){
                 key = ["account","result","transactions"];
                 value = [ethereum.selectedAddress,"balance is not enough for specified tier",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
