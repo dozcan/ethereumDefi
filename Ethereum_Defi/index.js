@@ -482,12 +482,6 @@ app.post('/ClaimSecond',function(req,res){
 });
 
 
-module.exports = {
-  AddressSituation,
-  Lock,
-  ClaimInformation,
-  ClaimSecond
-}
 
 app.listen(6000,()=>{
   console.log(6000+"listening");
