@@ -241,28 +241,28 @@ app.post('/ClaimInformation',function(req,res){
 
   var set = async() => {
     try{
-            let body = JSON.stringify(req.body.address);
-            let ethereum = JSON.parse(body);
-            let result;
-            console.log("1",ethereum.selectedAddress)
+      let body = JSON.stringify(req.body.address);
+      let ethereum = JSON.parse(body);
+      let personAddress = ethereum.selectedAddress;
+
             try{
-   
+             console.log("1")
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:TokenAddress
               });
-            
+              console.log("2")
               var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:LockAddress
               });
-            
+              console.log("3")
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress,
                 to:DistributionAddress
               });
-           
-              let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:ethereum.selectedAddress});
+              console.log("4")
+              let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:personAddress});
               console.log("canBeClaimableDate",canBeClaimableDate);
               let start = new Date(canBeClaimableDate*1000);
               var end = Date.now()
@@ -302,7 +302,7 @@ app.post('/ClaimInformation',function(req,res){
               }
              
               key = ["account","result"];
-              value = [ethereum.selectedAddress,result];
+              value = [personAddress,result];
               rawResponseObject = responseMaker.createResponse(key,value);
               response = responseMaker.responseMaker(rawResponseObject);
               res.send(response);
@@ -313,7 +313,7 @@ app.post('/ClaimInformation',function(req,res){
               result.message= "address has not rights for claim"
               result.success = false;
               key = ["account","result"];
-              value = [ethereum.selectedAddress,result];
+              value = [personAddress,result];
               rawResponseObject = responseMaker.createResponse(key,value);
               response = responseMaker.responseMaker(rawResponseObject);
               res.send(response);
