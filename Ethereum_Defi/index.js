@@ -67,7 +67,7 @@ app.post('/AddressSituation',function(req,res){
     }
     catch(err)
     {
-      errorCode = requestTypeError.account_create;
+      errorCode = requestTypeError.AddressSituation;
       errorMessage =  helper.error(errorCode,err);
       response = responseMaker.responseErrorMaker(errorCode,errorMessage);
       res.send(response);
@@ -87,8 +87,6 @@ app.post('/AddressSituation',function(req,res){
 app.post('/Lock',function(req,res){
 
   var set = async() => {
- 
-
             try{
               
               let body = JSON.stringify(req.body.address);
@@ -210,13 +208,11 @@ app.post('/Lock',function(req,res){
                                  
             } 
             catch(err){
-                errorCode = requestTypeError.identity_transactional_hash;
+                errorCode = requestTypeError.Lock;
                 errorMessage =  helper.error(errorCode,err);
                 response = responseMaker.responseErrorMaker(errorCode,errorMessage);
                 res.send(response);
             }
-                       
-    
   }
   set();    
 });
@@ -302,15 +298,10 @@ app.post('/ClaimInformation',function(req,res){
                                  
             } 
             catch(err){
-              console.log("err1",err)
-              result.message= err;
-              result.success = false;
-              key = ["account","result"];
-              value = [personAddress,result];
-              rawResponseObject = responseMaker.createResponse(key,value);
-              response = responseMaker.responseMaker(rawResponseObject);
-              res.send(response);
-                               
+              errorCode = requestTypeError.ClaimInformation;
+              errorMessage =  helper.error(errorCode,err);
+              response = responseMaker.responseErrorMaker(errorCode,errorMessage);
+              res.send(response);         
             }
                        
   }
