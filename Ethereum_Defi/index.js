@@ -232,13 +232,12 @@ app.post('/ClaimInformation',function(req,res){
 
   var set = async() => {
    
-    
+            let body = JSON.stringify(req.body.address);
+            let ethereum = JSON.parse(body);
+            let personAddress = ethereum.selectedAddress;
+            let result;
             try{
-              let body = JSON.stringify(req.body.address);
-              let ethereum = JSON.parse(body);
-              let personAddress = ethereum.selectedAddress;
-              let result;
-        
+              
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
                 from: personAddress, 
                 to:TokenAddress
