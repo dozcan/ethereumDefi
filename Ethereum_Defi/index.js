@@ -92,7 +92,7 @@ app.post('/Lock',function(req,res){
             let nestIndex = JSON.stringify(req.body.nestIndex);
             let tierIndex = JSON.stringify(req.body.tierIndex);
             let ethereum = JSON.stringify(req.body.address);
-            let ethereum = JSON.parse(ethereum);
+            ethereum = JSON.parse(ethereum);
             let lockAmount = 0;
             console.log(nestIndex,tierIndex,ethereum);
 
