@@ -29,7 +29,7 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-      let ethereum = JSON.parse(req.body.address);
+      let ethereum = JSON.stringfy(req.body.address);
       console.log("ethere",ethereum)
       let personAddress = helper.cleanWhiteCharacter(ethereum.selectedAddress);
       console.log("wewe",personAddress);
