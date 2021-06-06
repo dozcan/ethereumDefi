@@ -298,9 +298,13 @@ app.post('/ClaimInformation',function(req,res){
                                  
             } 
             catch(err){
+              console.log("1")
               errorCode = requestTypeError.ClaimInformation;
+              console.log("2")
               errorMessage =  helper.error(errorCode,err);
+              console.log("3")
               response = responseMaker.responseErrorMaker(errorCode,errorMessage);
+              console.log("4")
               res.send(response);         
             }
                        
