@@ -242,7 +242,8 @@ app.post('/ClaimInformation',function(req,res){
 
   var set = async() => {
     try{
-            let ethereum = JSON.stringify(req.body.address);
+            let body = JSON.stringify(req.body.address);
+            let ethereum = JSON.parse(body);
             let result;
             try{
    
@@ -262,15 +263,19 @@ app.post('/ClaimInformation',function(req,res){
               });
 
               let canBeClaimableDate =  await MyContractLock.methods.canBeClaimable().call({from:ethereum.selectedAddress});
+              console.log("canBeClaimableDate",canBeClaimableDate);
               let start = new Date(canBeClaimableDate*1000);
               var end = Date.now()
             
               const date1 = new Date(start);
               const date2 = new Date(end);
+          
               const oneDay = 1000 * 60 * 60 * 24;
               const diffInTime = date2.getTime() - date1.getTime();
               const diffInDays = Math.round(diffInTime / oneDay);	
          
+              console.log(date1,date2,diffInDays);
+
              if( diffInDays > 90) {
                 result.message = "there is no fee for your claim"
                 result.success = true;
