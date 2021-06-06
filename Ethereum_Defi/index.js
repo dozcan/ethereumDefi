@@ -321,22 +321,26 @@ app.post('/ClaimInformation',function(req,res){
 app.post('/ClaimFirst',function(req,res){
 
   var set = async() => {
-    try{
-            let ethereum = JSON.stringify(req.body.address);
+
+            
             try{
+              let body = JSON.stringify(req.body.address);
+              let ethereum = JSON.parse(body);
+              let personAddress = ethereum.selectedAddress;
+            
 
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:TokenAddress
               });
             
               var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:LockAddress
               });
             
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:DistributionAddress
               });
    
@@ -345,33 +349,25 @@ app.post('/ClaimFirst',function(req,res){
                  data: claimOP,
                  gasLimit:'3000000',
                  gas:'63262',
-                 from:ethereum.selectedAddress,
+                 from:personAddress,
                  to:LockAddress
                }
 
                let encoding = [paramClaim];
 
                key = ["account","transactions"];
-               value = [ethereum.selectedAddress,encoding];
+               value = [personAddress,encoding];
                rawResponseObject = responseMaker.createResponse(key,value);
                response = responseMaker.responseMaker(rawResponseObject);
                res.send(response);
                                  
             } 
             catch(err){
-              errorCode = requestTypeError.identity_transactional_hash;
+              errorCode = requestTypeError.ClaimFirst;
               errorMessage =  helper.error(errorCode,err);
               response = responseMaker.responseErrorMaker(errorCode,errorMessage);
               res.send(response);                    
             }
-    }
-    catch(err)
-    {
-      errorCode = requestTypeError.identity;
-      errorMessage = helper.error(errorCode,err);
-      response = responseMaker.responseErrorMaker(errorCode,errorMessage);
-      res.send(response);
-    }
   }
   set();    
 });
@@ -385,28 +381,30 @@ app.post('/ClaimFirst',function(req,res){
 app.post('/ClaimSecond',function(req,res){
 
   var set = async() => {
-    try{
-            let ethereum = JSON.stringify(req.body.address);
-            let result;
-            try{
 
+            try{
+              let body = JSON.stringify(req.body.address);
+              let ethereum = JSON.parse(body);
+              let personAddress = ethereum.selectedAddress;
+              let result;
+            
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:TokenAddress
               });
             
               var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:LockAddress
               });
             
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-                from: ethereum.selectedAddress, 
+                from: personAddress, 
                 to:DistributionAddress
               });
    
-              let getDurationOflockTimeforPerson =  await MyContractLock.methods.getDurationOflockTimeforPerson().call({from:ethereum.selectedAddress});
-              let idoTime = await MyContractDistribution.methods.canRigtForDistribution().call({from:ethereum.selectedAddress});
+              let getDurationOflockTimeforPerson =  await MyContractLock.methods.getDurationOflockTimeforPerson().call({from:personAddress});
+              let idoTime = await MyContractDistribution.methods.canRigtForDistribution().call({from:personAddress});
  
                 if(getDurationOflockTimeforPerson[0] <= idoTime[0]){
                   if(getDurationOflockTimeforPerson[0]  == getDurationOflockTimeforPerson[1] ){ // kilitleme bozulmamış
@@ -430,7 +428,7 @@ app.post('/ClaimSecond',function(req,res){
 
                 if(result.succes === false){
                   key = ["account","result","transactions"];
-                  value = [ethereum.selectedAddress,"you have not rights for distribution",[]];
+                  value = [personAddress,"you have not rights for distribution",[]];
                   rawResponseObject = responseMaker.createResponse(key,value);
                   response = responseMaker.responseMaker(rawResponseObject);
                   res.send(response);
@@ -441,7 +439,7 @@ app.post('/ClaimSecond',function(req,res){
                  data: encodedstartDistribution,
                  gasLimit:'3000000',
                  gas:'63262',
-                 from:ethereum.selectedAddress,
+                 from:personAddress,
                  to:DistributionAddress
                  }
 
@@ -449,26 +447,18 @@ app.post('/ClaimSecond',function(req,res){
              
  
                  key = ["account","result","transactions"];
-                 value = [ethereum.selectedAddress,"",encoding];
+                 value = [personAddress,"",encoding];
                  rawResponseObject = responseMaker.createResponse(key,value);
                  response = responseMaker.responseMaker(rawResponseObject);
                  res.send(response);
                                  
             } 
             catch(err){
-              errorCode = requestTypeError.identity_transactional_hash;
+              errorCode = requestTypeError.ClaimSecond;
               errorMessage =  helper.error(errorCode,err);
               response = responseMaker.responseErrorMaker(errorCode,errorMessage);
               res.send(response);                    
             }
-    }
-    catch(err)
-    {
-      errorCode = requestTypeError.identity;
-      errorMessage = helper.error(errorCode,err);
-      response = responseMaker.responseErrorMaker(errorCode,errorMessage);
-      res.send(response);
-    }
   }
   set();    
 });
