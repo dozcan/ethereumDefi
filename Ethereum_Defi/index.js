@@ -95,35 +95,36 @@ app.post('/Lock',function(req,res){
       
 
             try{
-
+              console.log("1")
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
                 from: personAddress, 
                 to:TokenAddress
               });
-            
+              console.log("2")
               var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
                 from: personAddress, 
                 to:LockAddress
               });
-            
+              console.log("3")
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
                 from:personAddress, 
                 to:DistributionAddress
               });
-
-              var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});           
+              console.log("4")
+              var bakiye =  await MyContractToken.methods.balanceOf(personAddress).call({from:personAddress});           
+             
               bakiye = Number.parseInt(bakiye);
               tierIndex = Number.parseInt(tierIndex);
               if(tierIndex === 1 && bakiye < 150){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier-1",[]];
+                value = [personAddress,"balance is not enough for specified tier-1",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
               else if(tierIndex === 2 && bakiye < 200){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier-2",[]];
+                value = [personAddress,"balance is not enough for specified tier-2",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
@@ -131,7 +132,7 @@ app.post('/Lock',function(req,res){
               }
               else if(tierIndex === 3 && bakiye < 300){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier-3",[]];
+                value = [personAddress,"balance is not enough for specified tier-3",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
@@ -139,34 +140,34 @@ app.post('/Lock',function(req,res){
               }
               
               //lock-2
-              var canBeLockable =  await MyContractLock.methods.canBeLockable().call({from:ethereum.selectedAddress});
+              var canBeLockable =  await MyContractLock.methods.canBeLockable().call({from:personAddress});
               if(canBeLockable){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"address made lock before so you cant lock again",[]];
+                value = [personAddress,"address made lock before so you cant lock again",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
                
               //lock-3
-              var ifNestFull =  await MyContractLock.methods.ifNestFull(nestIndex).call({from:ethereum.selectedAddress});
+              var ifNestFull =  await MyContractLock.methods.ifNestFull(nestIndex).call({from:personAddress});
               let par1 = Number.parseInt(ifNestFull[0]);
               let par2 = Number.parseInt(ifNestFull[1]);
               let par3 = Number.parseInt(ifNestFull[2]);
               if(par1 + par2 + par3 === 375){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"selected nest is full select another nest",[]];
+                value = [personAddress,"selected nest is full select another nest",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
            
               //lock-4
-              var ifTierFull =  await MyContractLock.methods.ifTierFull(nestIndex,tierIndex).call({from:ethereum.selectedAddress});
+              var ifTierFull =  await MyContractLock.methods.ifTierFull(nestIndex,tierIndex).call({from:personAddress});
               ifTierFull = Number.parseInt(ifTierFull);
               if(ifTierFull === 125){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"selected tier is full select another tier",[]];
+                value = [personAddress,"selected tier is full select another tier",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
@@ -187,7 +188,7 @@ app.post('/Lock',function(req,res){
                  data: encodedToken,
                  gasLimit:'3000000',
                  gas:'63262',
-                 from:ethereum.selectedAddress,
+                 from:personAddress,
                  to:TokenAddress
                }
 
@@ -196,7 +197,7 @@ app.post('/Lock',function(req,res){
                 data: encodedToken2,
                 gasLimit:'3000000',
                 gas:'63262',
-                from:ethereum.selectedAddress,
+                from:personAddress,
                 to:LockAddress
                 }
                
@@ -204,7 +205,7 @@ app.post('/Lock',function(req,res){
 
 
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"",encoding];
+                value = [personAddress,"",encoding];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
