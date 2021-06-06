@@ -29,33 +29,30 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-      console.log("sds",req.body);
-      let ethereum = JSON.stringify(req.body.address.selectedAddress);
-      console.log("ethereum",ethereum);
+      let ethereum = JSON.parse(req.body.address);
+      console.log("ethere",ethereum)
+      let personAddress = helper.cleanWhiteCharacter(ethereum.selectedAddress);
+      console.log("wewe",personAddress);
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
-        from: ethereum, 
+        from: personAddress, 
         to:TokenAddress
       });
-      
-      console.log("1");
     
       var MyContractLock = new web3.eth.Contract(abis.abiLock, LockAddress, {
-        from: ethereum, 
+        from: personAddress, 
         to:LockAddress
       });
-          console.log("2");
+    
       var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
-        from: ethereum, 
+        from:personAddress, 
         to:DistributionAddress
       });
 
-          console.log("3",ethereum);
-      var bakiye =  await MyContractToken.methods.balanceOf(ethereum).call({from:ethereum});
-            console.log("4");
-      var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:ethereum});
-            console.log("5");
-      var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:ethereum});
-      var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:ethereum});
+    
+      var bakiye =  await MyContractToken.methods.balanceOf(personAddress).call({from:personAddress});
+      var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:personAddress});
+      var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:personAddress});
+      var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:personAddress});
       
       let obj = {
          "nest1":[Nest1[0],Nest1[1],Nest1[2]],
@@ -64,14 +61,13 @@ app.post('/AddressSituation',function(req,res){
       }
 
       key = ["account","balance","situation"];
-      value = [ethereum,bakiye,obj];
+      value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
       res.send(response);
     }
     catch(err)
     {
-      console.log("err",err);
       errorCode = requestTypeError.account_create;
       errorMessage =  helper.error(errorCode,err);
       response = responseMaker.responseErrorMaker(errorCode,errorMessage);
@@ -485,6 +481,13 @@ app.post('/ClaimSecond',function(req,res){
   set();    
 });
 
+
+module.exports = {
+  AccountCreate,
+  DeployContract,
+  Identity,
+  getIdentity
+}
 
 app.listen(6000,()=>{
   console.log(6000+"listening");
