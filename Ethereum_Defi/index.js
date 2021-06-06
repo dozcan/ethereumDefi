@@ -29,10 +29,10 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-      let ethereum = JSON.stringify(req.body.address);
-      console.log("ethere",ethereum)
-      let ethereum2 = JSON.parse(req.body.address);
-      console.log("ethere2",ethereum2)
+      let body = JSON.stringify(req.body.address);
+      console.log("body",body);
+      let ethereum = JSON.parse(body);
+      console.log("ethereum",ethereum)
       let personAddress = helper.cleanWhiteCharacter(ethereum.selectedAddress);
       console.log("wewe",personAddress);
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
