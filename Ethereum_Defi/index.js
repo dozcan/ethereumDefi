@@ -113,29 +113,27 @@ app.post('/Lock',function(req,res){
                 to:DistributionAddress
               });
 
-
               var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});           
               bakiye = Number.parseInt(bakiye);
               tierIndex = Number.parseInt(tierIndex);
               if(tierIndex === 1 && bakiye < 150){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier",[]];
+                value = [ethereum.selectedAddress,"balance is not enough for specified tier-1",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
               else if(tierIndex === 2 && bakiye < 200){
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier",[]];
+                value = [ethereum.selectedAddress,"balance is not enough for specified tier-2",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
 
               }
               else if(tierIndex === 3 && bakiye < 300){
-                console.log("3. if");
                 key = ["account","result","transactions"];
-                value = [ethereum.selectedAddress,"balance is not enough for specified tier",[]];
+                value = [ethereum.selectedAddress,"balance is not enough for specified tier-3",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
@@ -154,7 +152,10 @@ app.post('/Lock',function(req,res){
                
               //lock-3
               var ifNestFull =  await MyContractLock.methods.ifNestFull(nestIndex).call({from:ethereum.selectedAddress});
-              if(ifNestFull[0] + ifNestFull[1] + ifNestFull[2] === 375){
+              let par1 = Number.parseInt(ifNestFull[0]);
+              let par2 = Number.parseInt(ifNestFull[1]);
+              let par3 = Number.parseInt(ifNestFull[2]);
+              if(par1 + par2 + par3 === 375){
                 key = ["account","result","transactions"];
                 value = [ethereum.selectedAddress,"selected nest is full select another nest",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
@@ -164,6 +165,7 @@ app.post('/Lock',function(req,res){
            
               //lock-4
               var ifTierFull =  await MyContractLock.methods.ifTierFull(nestIndex,tierIndex).call({from:ethereum.selectedAddress});
+              ifTierFull = Number.parseInt(ifTierFull);
               if(ifTierFull === 125){
                 key = ["account","result","transactions"];
                 value = [ethereum.selectedAddress,"selected tier is full select another tier",[]];
