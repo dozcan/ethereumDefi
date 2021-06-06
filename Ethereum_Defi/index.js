@@ -115,6 +115,7 @@ app.post('/Lock',function(req,res){
 
 
               var bakiye =  await MyContractToken.methods.balanceOf(ethereum.selectedAddress).call({from:ethereum.selectedAddress});           
+              bakiye = Number.parseInt(bakiye);
               console.log("bakiye",bakiye,tierIndex);
               if(bakiye === 0){
                 key = ["account","result","transactions"];
