@@ -29,7 +29,7 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-      let ethereum = JSON.stringfy(req.body.address);
+      let ethereum = JSON.stringify(req.body.address);
       console.log("ethere",ethereum)
       let ethereum2 = JSON.parse(req.body.address);
       console.log("ethere2",ethereum2)
