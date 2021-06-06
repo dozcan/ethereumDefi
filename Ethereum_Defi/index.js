@@ -306,7 +306,7 @@ app.post('/ClaimInformation',function(req,res){
               result.message= err;
               result.success = false;
               key = ["account","result"];
-              value = [personAddress,err];
+              value = [personAddress,result];
               rawResponseObject = responseMaker.createResponse(key,value);
               response = responseMaker.responseMaker(rawResponseObject);
               res.send(response);
