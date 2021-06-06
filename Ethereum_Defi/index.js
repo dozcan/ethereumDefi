@@ -29,8 +29,8 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-      //let body = JSON.stringify(req.body.address);
-      let ethereum = JSON.parse(req.body.address);
+      let body = JSON.stringify(req.body.address);
+      let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
         from: personAddress, 
@@ -88,10 +88,13 @@ app.post('/Lock',function(req,res){
 
   var set = async() => {
     try{
+
             let nestIndex = JSON.stringify(req.body.nestIndex);
             let tierIndex = JSON.stringify(req.body.tierIndex);
             let ethereum = JSON.stringify(req.body.address);
+            let ethereum = JSON.parse(ethereum);
             let lockAmount = 0;
+            console.log(nestIndex,tierIndex,ethereum);
 
             try{
 
