@@ -483,10 +483,10 @@ app.post('/ClaimSecond',function(req,res){
 
 
 module.exports = {
-  AccountCreate,
-  DeployContract,
-  Identity,
-  getIdentity
+  AddressSituation,
+  Lock,
+  ClaimInformation,
+  ClaimSecond
 }
 
 app.listen(6000,()=>{
