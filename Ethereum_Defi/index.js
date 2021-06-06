@@ -257,6 +257,7 @@ app.post('/ClaimInformation',function(req,res){
                 from: personAddress, 
                 to:LockAddress
               });
+
               console.log("3")
               var MyContractDistribution = new web3.eth.Contract(abis.abiDistribution, DistributionAddress, {
                 from: personAddress,
@@ -311,6 +312,7 @@ app.post('/ClaimInformation',function(req,res){
                                  
             } 
             catch(err){
+              console.log("err1",err)
               result.message= "address has not rights for claim"
               result.success = false;
               key = ["account","result"];
@@ -324,6 +326,7 @@ app.post('/ClaimInformation',function(req,res){
     }
     catch(err)
     {
+      console.log("err2",err)
       errorCode = requestTypeError.identity;
       errorMessage = helper.error(errorCode,err);
       response = responseMaker.responseErrorMaker(errorCode,errorMessage);
