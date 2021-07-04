@@ -5,8 +5,8 @@ const Web3 = require('web3');
 const abis = require('./abi.js');
 
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
-var TokenAddress  = "0x95b03895A0c58A868324c2098a89178679EFAE48"
-var LockAddress  = "0xd431187ff85b1200cC2B35133438a09C103BF932"
+var TokenAddress  = "0xA073B373572f3E6d60daE92057F35c80e204b5Ee"
+var LockAddress  = "0xc5a890232493E7eF3744b8f5C4FdFa98a8c47674"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 const cors = require('cors');
@@ -111,14 +111,14 @@ app.post('/Lock',function(req,res){
              
               bakiye = Number.parseInt(bakiye);
               tierIndex = Number.parseInt(tierIndex);
-              if(tierIndex === 1 && bakiye < 150){
+              if(tierIndex === 1 && bakiye < 15000){
                 key = ["account","result","transactions"];
                 value = [personAddress,"balance is not enough for specified tier-1",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
-              else if(tierIndex === 2 && bakiye < 200){
+              else if(tierIndex === 2 && bakiye < 20000){
                 key = ["account","result","transactions"];
                 value = [personAddress,"balance is not enough for specified tier-2",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
@@ -126,7 +126,7 @@ app.post('/Lock',function(req,res){
                 res.send(response);
 
               }
-              else if(tierIndex === 3 && bakiye < 300){
+              else if(tierIndex === 3 && bakiye < 30000){
                 key = ["account","result","transactions"];
                 value = [personAddress,"balance is not enough for specified tier-3",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
@@ -170,13 +170,13 @@ app.post('/Lock',function(req,res){
               }
                
               if(tierIndex === 1){
-                lockAmount = 150;
+                lockAmount = 15000;
               }
               else if(tierIndex === 2){
-                lockAmount = 200;
+                lockAmount = 20000;
               }
               else if(tierIndex === 3){
-                lockAmount = 300;
+                lockAmount = 30000;
               }
           
               var encodedToken =  await MyContractToken.methods.approve(LockAddress,lockAmount).encodeABI();
