@@ -1,4 +1,4 @@
-var _abiToken =[
+var _abiToken = [
 	{
 		"inputs": [
 			{
