@@ -33,20 +33,6 @@ var value ;
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
 app.post('/AddressSituation',cors(corsOptions),function(req,res){ 
-
-let errorMessage;
-let errorCode;
-var rawResponseObject;
-var key;
-var value ;
-
-
-
-/*Account yaratmak için rest api url
-*Çağırım : http://ip:port/AddressSituation
-*input : {address:ethereum}
-*output: account adresi, privateKey*/
-app.post('/AddressSituation',cors(corsOptions),function(req,res){ 
   var create = async() =>{
     try
     {
