@@ -13,8 +13,10 @@ const cors = require('cors');
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
-
+//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
+app.use(cors({
+  credentials: true,
+}));
 let errorMessage;
 let errorCode;
 var rawResponseObject;
