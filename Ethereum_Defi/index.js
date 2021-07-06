@@ -48,9 +48,7 @@ app.post('/AddressSituation', cors(corsOps), function(req,res){
   var create = async() =>{
     try
     {
-       res.header("Access-Control-Allow-Origin", "*");
-       res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
-       res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
+      console.log("istek geldi1")
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
@@ -69,7 +67,7 @@ app.post('/AddressSituation', cors(corsOps), function(req,res){
         to:DistributionAddress
       });
 
-    
+    console.log("istek geldi2")
       var bakiye =  await MyContractToken.methods.balanceOf(personAddress).call({from:personAddress});
       var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:personAddress});
       var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:personAddress});
@@ -85,10 +83,12 @@ app.post('/AddressSituation', cors(corsOps), function(req,res){
       value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
+     console.log("istek geldi2",response;)
       res.send(response);
     }
     catch(err)
     {
+     console.log("istek geldi4",err)
       errorCode = requestTypeError.AddressSituation;
       errorMessage =  helper.error(errorCode,err);
       response = responseMaker.responseErrorMaker(errorCode,errorMessage);
