@@ -12,12 +12,12 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-//var bodyParser = require('body-parser');
-//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
-var corsOptions = {
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
+/*var corsOptions = {
   origin: 'https://www.anttroop.org',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+}*/
 
 let errorMessage;
 let errorCode;
@@ -31,7 +31,7 @@ var value ;
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
-app.post('/AddressSituation', cors(corsOptions),function(req,res){ 
+app.post('/AddressSituation',function(req,res){ 
   var create = async() =>{
     try
     {
