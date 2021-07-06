@@ -13,7 +13,7 @@ const cors = require('cors');
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-app.use(cors());
+app.use(cors({origin: '*'}));
 app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 let errorMessage;
 let errorCode;
