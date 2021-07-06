@@ -3,6 +3,7 @@ const responseMaker =require('./responseMaker.js');
 const requestTypeError = require('./enum.js');
 const Web3 = require('web3');
 const abis = require('./abi.js');
+const bodyParser = require('body-parser')
 
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
 var TokenAddress  = "0xA073B373572f3E6d60daE92057F35c80e204b5Ee"
@@ -12,13 +13,10 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-//var bodyParser = require('body-parser');
-//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200 ,
-  methods: 'GET, PUT'
-}
+ app.use(cors());
+ app.use(bodyParser.urlencoded({extended: true}));
+ app.use(bodyParser.json());
+
 
 let errorMessage;
 let errorCode;
@@ -27,7 +25,7 @@ var key;
 var value ;
 
 
-
+app.options('*', cors())
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
