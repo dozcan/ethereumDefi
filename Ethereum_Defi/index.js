@@ -12,13 +12,27 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-const allowedOrigins = ['http://localhost:3000'];
+//var bodyParser = require('body-parser');
+//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
+var corsOptions = {
+  origin: 'https://www.localhost:3000',
+  optionsSuccessStatus: 200 ,
+  methods: 'GET, PUT'
+}
 
-const options= cors.CorsOptions = {
-  origin: allowedOrigins
-};
-app.use(cors(options));
-app.use(express.json());
+let errorMessage;
+let errorCode;
+var rawResponseObject;
+var key;
+var value ;
+
+
+
+/*Account yaratmak için rest api url
+*Çağırım : http://ip:port/AddressSituation
+*input : {address:ethereum}
+*output: account adresi, privateKey*/
+app.post('/AddressSituation',cors(corsOptions),function(req,res){ 
 
 let errorMessage;
 let errorCode;
