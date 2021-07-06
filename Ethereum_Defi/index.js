@@ -12,14 +12,19 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-app.use(cors({origin: '*'}));
+
 let errorMessage;
 let errorCode;
 var rawResponseObject;
 var key;
 var value ;
 
-app.options('*', cors())
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
