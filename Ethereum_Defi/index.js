@@ -13,13 +13,21 @@ const cors = require('cors');
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-app.use(cors());
-app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
+//app.use(cors());
+//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 let errorMessage;
 let errorCode;
 var rawResponseObject;
 var key;
 var value ;
+
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
