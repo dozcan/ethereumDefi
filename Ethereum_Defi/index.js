@@ -15,7 +15,7 @@ const app = express();
 //var bodyParser = require('body-parser');
 //app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 var corsOptions = {
-  origin: 'http://www.localhost:3000',
+  origin: '*',
   optionsSuccessStatus: 200 ,
   methods: 'GET, PUT'
 }
