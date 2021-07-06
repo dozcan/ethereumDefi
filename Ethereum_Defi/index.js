@@ -9,22 +9,27 @@ var TokenAddress  = "0xA073B373572f3E6d60daE92057F35c80e204b5Ee"
 var LockAddress  = "0xc5a890232493E7eF3744b8f5C4FdFa98a8c47674"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
+
+
+
+
+
 const cors = require('cors');
 var express = require('express');
 const app = express();
-
-let errorMessage;
-let errorCode;
-var rawResponseObject;
-var key;
-var value ;
-
+var bodyParser = require('body-parser');
+app.use(cors());
+app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
+let errorMessage;
+let errorCode;
+var rawResponseObject;
+var key;
+var value ;
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
@@ -34,9 +39,6 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-  
-     
-     
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
