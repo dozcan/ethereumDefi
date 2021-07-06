@@ -19,7 +19,7 @@ var rawResponseObject;
 var key;
 var value ;
 
- 
+app.options('*', cors())
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
@@ -66,12 +66,6 @@ app.post('/AddressSituation',function(req,res){
       value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
-       
-      res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-      res.header('Access-Control-Allow-Credentials', true);
-     
-   
       res.send(response);
     }
     catch(err)
