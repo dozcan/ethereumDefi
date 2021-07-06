@@ -32,10 +32,13 @@ var value ;
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
-app.post('/AddressSituation',cors(corsOptions),function(req,res){ 
+app.post('/AddressSituation',function(req,res){ 
   var create = async() =>{
     try
     {
+       res.header("Access-Control-Allow-Origin", "*");
+       res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
+       res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
