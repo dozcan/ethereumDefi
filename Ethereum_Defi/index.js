@@ -14,11 +14,9 @@ var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
 app.use(cors({
-  'origin': '*',
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
+  credentials: true,
 }));
-app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
+//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 
 let errorMessage;
 let errorCode;
