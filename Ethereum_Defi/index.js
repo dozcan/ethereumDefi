@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 //app.use(cors({origin: 'http://localhost:3000'}));
 var corsOptions = {
-     origin: 'http://localhost:30000',
+     origin: 'http://localhost:3000',
      optionsSuccessStatus: 200
 }
 let errorMessage;
