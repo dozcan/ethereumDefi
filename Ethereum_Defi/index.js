@@ -72,7 +72,7 @@ app.post('/AddressSituation',function(req,res){
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
-        body: responseMaker.responseMaker(rawResponseObject);,
+        body: responseMaker.responseMaker(rawResponseObject),
       };
      
    
