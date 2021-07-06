@@ -9,18 +9,12 @@ var TokenAddress  = "0xA073B373572f3E6d60daE92057F35c80e204b5Ee"
 var LockAddress  = "0xc5a890232493E7eF3744b8f5C4FdFa98a8c47674"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
-
-
+const cors = require('cors');
 var express = require('express');
-
-var app = express();
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
+const app = express();
+var bodyParser = require('body-parser');
+app.use(cors());
+app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 let errorMessage;
 let errorCode;
 var rawResponseObject;
