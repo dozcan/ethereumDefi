@@ -29,9 +29,9 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-       res.setHeader('Access-Control-Allow-Origin', '*')
-       res.setHeader('Access-Control-Allow-Methods', 'POST, GET')
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  
+     
+     
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
@@ -65,7 +65,17 @@ app.post('/AddressSituation',function(req,res){
       key = ["account","balance","situation"];
       value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
-      response = responseMaker.responseMaker(rawResponseObject);
+       const response = {
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        body: responseMaker.responseMaker(rawResponseObject);,
+      };
+     
+   
       res.send(response);
     }
     catch(err)
