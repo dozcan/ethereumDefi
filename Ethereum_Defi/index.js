@@ -12,12 +12,13 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-//var bodyParser = require('body-parser');
-//app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
-var corsOptions = {
-  origin: 'https://www.anttroop.org:8080',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+const allowedOrigins = ['http://localhost:3000'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
+app.use(express.json());
 
 let errorMessage;
 let errorCode;
