@@ -20,18 +20,17 @@ var rawResponseObject;
 var key;
 var value ;
 
-app.use(function (req, res, next) {
-   res.setHeader('Access-Control-Allow-Origin', '*')
-   res.setHeader('Access-Control-Allow-Methods', 'POST, GET')
-   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-});
-
+ 
+var corsOptions = {
+     origin: 'http://localhost:4200',
+     optionsSuccessStatus: 200
+}
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
-app.post('/AddressSituation',function(req,res){ 
+app.post('/AddressSituation',cors(corsOptions),function(req,res){ 
   var create = async() =>{
     try
     {
