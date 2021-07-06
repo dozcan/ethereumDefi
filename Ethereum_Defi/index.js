@@ -12,7 +12,7 @@ var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 const cors = require('cors');
 var express = require('express');
 const app = express();
-app.use(cors())
+app.use(cors({origin: '*'}));
 let errorMessage;
 let errorCode;
 var rawResponseObject;
@@ -65,15 +65,11 @@ app.post('/AddressSituation',function(req,res){
       key = ["account","balance","situation"];
       value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
-       const response = {
-        statusCode: 200,
-        headers: {
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
-        body: responseMaker.responseMaker(rawResponseObject),
-      };
+      response = responseMaker.responseMaker(rawResponseObject);
+       
+      res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.header('Access-Control-Allow-Credentials', true);
      
    
       res.send(response);
