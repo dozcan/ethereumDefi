@@ -14,7 +14,11 @@ var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
-app.use(cors({origin: 'http://localhost:3000'}));
+//app.use(cors({origin: 'http://localhost:3000'}));
+var corsOptions = {
+     origin: 'http://localhost:30000',
+     optionsSuccessStatus: 200
+}
 let errorMessage;
 let errorCode;
 var rawResponseObject;
@@ -27,7 +31,7 @@ var value ;
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
-app.post('/AddressSituation',function(req,res){ 
+app.post('/AddressSituation', cors(corsOptions),function(req,res){ 
   var create = async() =>{
     try
     {
