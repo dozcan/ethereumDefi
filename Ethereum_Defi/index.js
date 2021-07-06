@@ -17,7 +17,7 @@ const app = express();
  app.use(cors());
  app.use(bodyParser.urlencoded({extended: true}));
  app.use(bodyParser.json());
-
+app.set('port', process.env.PORT || 6000)
 
 let errorMessage;
 let errorCode;
@@ -472,8 +472,8 @@ app.post('/ClaimSecond',function(req,res){
   set();    
 });
 
- return http.createServer(app).listen(app.get(6000), '0.0.0.0', () => {
-    console.log("Server started at http://localhost:" + app.get(6000) + "/")
+ return http.createServer(app).listen(app.get('port'), '0.0.0.0', () => {
+    console.log("Server started at http://localhost:" + app.get('port') + "/")
   })
 
 
