@@ -39,7 +39,9 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
- 
+       res.header('Access-Control-Allow-Origin', "*");
+       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+      res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
