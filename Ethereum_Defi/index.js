@@ -83,7 +83,7 @@ app.post('/AddressSituation', cors(corsOps), function(req,res){
       value = [personAddress,bakiye,obj];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
-     console.log("istek geldi2",response;)
+      console.log("istek geldi2",response)
       res.send(response);
     }
     catch(err)
