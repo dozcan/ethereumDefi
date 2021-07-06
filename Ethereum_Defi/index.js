@@ -13,7 +13,6 @@ const cors = require('cors');
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-app.use(cors({origin: '*'}));
 app.use(bodyParser.json({limit:1024*1024*1024,type:'application/json'}));
 let errorMessage;
 let errorCode;
@@ -28,10 +27,8 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 
-app.configure(function() {
-    app.use(allowCrossDomain);
-    //some other code
-});  
+app.use(allowCrossDomain);
+
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
