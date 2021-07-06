@@ -10,12 +10,12 @@ var LockAddress  = "0xc5a890232493E7eF3744b8f5C4FdFa98a8c47674"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 
-const cors = require('cors');
-var express = require('express');
-const app = express();
 
+var express = require('express');
+
+var app = express();
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
