@@ -21,7 +21,17 @@ var rawResponseObject;
 var key;
 var value ;
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
 
+app.configure(function() {
+    app.use(allowCrossDomain);
+    //some other code
+});  
 
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
@@ -31,9 +41,7 @@ app.post('/AddressSituation',function(req,res){
   var create = async() =>{
     try
     {
-     res.header("Access-Control-Allow-Origin", "*");
-     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
-     res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
+ 
       let body = JSON.stringify(req.body.address);
       let ethereum = JSON.parse(body);
       let personAddress = ethereum.selectedAddress;
