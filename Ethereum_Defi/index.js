@@ -32,6 +32,7 @@ const corsOps = {
   methods: [
     'GET',
     'POST',
+    'OPTIONS'
   ],
   allowedHeaders: [
     'Content-Type',
