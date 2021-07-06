@@ -21,6 +21,12 @@ var rawResponseObject;
 var key;
 var value ;
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+  });
+
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
