@@ -25,13 +25,26 @@ var rawResponseObject;
 var key;
 var value ;
 
-
 app.options('*', cors())
+
+const corsOps = {
+  origin: '*',
+  methods: [
+    'GET',
+    'POST',
+  ],
+  allowedHeaders: [
+    'Content-Type',
+    'json vs.'
+  ],
+};
+
+
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
 *output: account adresi, privateKey*/
-app.post('/AddressSituation',function(req,res){ 
+app.post('/AddressSituation', cors(corsOps), function(req,res){ 
   var create = async() =>{
     try
     {
