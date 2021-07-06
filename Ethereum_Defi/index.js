@@ -3,6 +3,7 @@ const responseMaker =require('./responseMaker.js');
 const requestTypeError = require('./enum.js');
 const Web3 = require('web3');
 const abis = require('./abi.js');
+const http = require('http')
 const bodyParser = require('body-parser')
 
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
@@ -471,8 +472,12 @@ app.post('/ClaimSecond',function(req,res){
   set();    
 });
 
+ return http.createServer(app).listen(app.get(6000), '0.0.0.0', () => {
+    console.log("Server started at http://localhost:" + app.get(6000) + "/")
+  })
 
 
-app.listen(6000,()=>{
+/*app.listen(6000,()=>{
   console.log(6000+"listening");
 });
+*/
