@@ -1,9 +1,10 @@
-//index.js
-//Import Express
-let express = require('express')
-//Start App
-let app = express();
-//Assign port
+
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
+
 var port = process.env.PORT || 8080;
 // Welcome message
 app.get('/', (req, res) => res.send('Welcome to Express'));
