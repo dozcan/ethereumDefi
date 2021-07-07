@@ -32,7 +32,9 @@ app.post('/AddressSituation',  function(req,res){
     {
       console.log("istek geldi1")
       let body = JSON.stringify(req.body.address);
+      console.log("istek geldi2",req,body)
       let ethereum = JSON.parse(body);
+       console.log("ethereum",ethereum)
       let personAddress = ethereum.selectedAddress;
       var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
         from: personAddress, 
