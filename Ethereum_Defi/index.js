@@ -30,7 +30,7 @@ app.post('/AddressSituation',  function(req,res){
   var create = async() =>{
     try
     {
-      console.log("istek geldi1")
+      console.log("istek geldi1",req.body)
       let body = JSON.stringify(req.body.address);
       console.log("istek geldi2",req,body)
       let ethereum = JSON.parse(body);
