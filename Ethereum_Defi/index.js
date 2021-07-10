@@ -10,11 +10,19 @@ var TokenAddress  = "0xA073B373572f3E6d60daE92057F35c80e204b5Ee"
 var LockAddress  = "0xc5a890232493E7eF3744b8f5C4FdFa98a8c47674"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
+var bodyParser = require('body-parser')
+
+
 var express = require('express')
 var cors = require('cors')
 var app = express()
 
 app.use(cors())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 let errorMessage;
 let errorCode;
