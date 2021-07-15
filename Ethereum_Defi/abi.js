@@ -428,12 +428,13 @@ var _abiToken = [
 		"type": "function"
 	}
 ]
-var _abiLock = [
+var _abiLock = 
+[
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_lockClaimAddress",
+				"name": "_BEP20TokenAddress",
 				"type": "address"
 			}
 		],
@@ -443,8 +444,88 @@ var _abiLock = [
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nestIndexLocal",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tierIndexLocal",
+				"type": "uint256"
+			}
+		],
+		"name": "balanceafterclaim",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
-		"name": "canRigtForDistribution",
+		"name": "canBeClaimable",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "canBeLockable",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "claim",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "claimAllBalances",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getDurationOflockTimeforPerson",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -462,18 +543,137 @@ var _abiLock = [
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [],
-		"name": "depositUsingVariable",
+		"name": "getNestSize",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nestIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "ifNestFull",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nestIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tierIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "ifTierFull",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "idoStartTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "idoEndingTime",
+				"type": "uint256"
+			}
+		],
+		"name": "isAddressClaimableForDistribution",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nestIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tierIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "lock",
 		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "isIdoTimeOrNot",
+		"name": "nestSize",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -487,8 +687,14 @@ var _abiLock = [
 	},
 	{
 		"constant": false,
-		"inputs": [],
-		"name": "setIdoFinish",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "administratorAddress",
+				"type": "address"
+			}
+		],
+		"name": "setAdministrator",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -499,32 +705,20 @@ var _abiLock = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_timestamp",
+				"name": "_nestSize",
 				"type": "uint256"
 			}
 		],
-		"name": "setIdoStart",
-		"outputs": [],
+		"name": "updateNestSize",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "startDistribution",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "transferToContractAll",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
