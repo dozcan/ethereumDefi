@@ -797,8 +797,12 @@ var abiDistribution = [
 		"type": "function"
 	}
 ]
-export  {
-    abiToken,
-    abiLock,
-	abiDistribution,
+
+const abis = {
+	abiToken : _abiToken,
+	abiLock : _abiLock,
+	abiDistribution : _abiDistribution
 }
+
+module.exports =  abis;
+
