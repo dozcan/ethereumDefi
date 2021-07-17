@@ -7,7 +7,7 @@ const http = require('http')
 
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
 var TokenAddress  = "0x228402887dE47eEa68c35511A8d5e18f52fD5Ae3"
-var LockAddress  = "0x8DE237F010257123Cf0CeDC595b50BBcaD2fdffD"
+var LockAddress  = "0xCcDD052340B31D64E4ca672Fa67a1efCEe4c4Bac"
 var DistributionAddress = "0xB816e66302592E0700bAbE6b712E124320571696"
 
 var bodyParser = require('body-parser')
@@ -60,10 +60,11 @@ app.post('/AddressSituation',  function(req,res){
       });
 
     console.log("istek geldi2")
-      var bakiye =  await MyContractToken.methods.balanceOf(personAddress).call({from:personAddress});
-      var Nest1 =  await MyContractLock.methods.ifNestFull(1).call({from:personAddress});
-      var Nest2 =  await MyContractLock.methods.ifNestFull(2).call({from:personAddress});
-      var Nest3 =  await MyContractLock.methods.ifNestFull(3).call({from:personAddress});
+      var bakiye     =  await MyContractToken.methods.balanceOf(personAddress).call({from:personAddress});
+      var Nest1      =  await MyContractLock.methods.ifNestFull(1).call({from:personAddress});
+      var Nest2      =  await MyContractLock.methods.ifNestFull(2).call({from:personAddress});
+      var Nest3      =  await MyContractLock.methods.ifNestFull(3).call({from:personAddress});
+      var NestPerson =  await MyContractLock.methods.getPersonNest().call({from:personAddress});
       
       let obj = {
          "nest1":[Nest1[0],Nest1[1],Nest1[2]],
@@ -71,8 +72,12 @@ app.post('/AddressSituation',  function(req,res){
          "nest3":[Nest3[0],Nest3[1],Nest3[2]],
       }
 
-      key = ["account","balance","situation"];
-      value = [personAddress,bakiye,obj];
+      let obj2 = {
+        "lockedTier":[NestPerson[0],NestPerson[1]]
+      }
+
+      key = ["account","balance","situation","list"];
+      value = [personAddress,bakiye,obj,obj2];
       rawResponseObject = responseMaker.createResponse(key,value);
       response = responseMaker.responseMaker(rawResponseObject);
       console.log("istek geldi2",response)
@@ -135,7 +140,7 @@ app.post('/Lock',function(req,res){
                 response = responseMaker.responseMaker(rawResponseObject);
                 res.send(response);
               }
-              else if(tierIndex === 2 && bakiye < 20000){
+              else if(tierIndex === 2 && bakiye < 35000){
                 key = ["account","result","transactions"];
                 value = [personAddress,"balance is not enough for specified tier-2",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
@@ -143,7 +148,7 @@ app.post('/Lock',function(req,res){
                 res.send(response);
 
               }
-              else if(tierIndex === 3 && bakiye < 30000){
+              else if(tierIndex === 3 && bakiye < 50000){
                 key = ["account","result","transactions"];
                 value = [personAddress,"balance is not enough for specified tier-3",[]];
                 rawResponseObject = responseMaker.createResponse(key,value);
@@ -190,10 +195,10 @@ app.post('/Lock',function(req,res){
                 lockAmount = 15000;
               }
               else if(tierIndex === 2){
-                lockAmount = 20000;
+                lockAmount = 35000;
               }
               else if(tierIndex === 3){
-                lockAmount = 30000;
+                lockAmount = 50000;
               }
           
               var encodedToken =  await MyContractToken.methods.approve(LockAddress,lockAmount).encodeABI();
