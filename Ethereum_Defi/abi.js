@@ -431,6 +431,65 @@ var _abiToken = [
 var _abiLock = 
 [
 	{
+		"constant": false,
+		"inputs": [],
+		"name": "claim",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "claimAllBalances",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nestIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tierIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "lock",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "administratorAddress",
+				"type": "address"
+			}
+		],
+		"name": "setAdministrator",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -441,6 +500,27 @@ var _abiLock =
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_nestSize",
+				"type": "uint256"
+			}
+		],
+		"name": "updateNestSize",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -499,30 +579,6 @@ var _abiLock =
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "claim",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "claimAllBalances",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [],
 		"name": "getDurationOflockTimeforPerson",
@@ -551,6 +607,21 @@ var _abiLock =
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getPersonNest",
+		"outputs": [
+			{
+				"internalType": "uint256[2]",
+				"name": "",
+				"type": "uint256[2]"
 			}
 		],
 		"payable": false,
@@ -651,26 +722,6 @@ var _abiLock =
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "nestIndex",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tierIndex",
-				"type": "uint256"
-			}
-		],
-		"name": "lock",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [],
 		"name": "nestSize",
@@ -683,42 +734,6 @@ var _abiLock =
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "administratorAddress",
-				"type": "address"
-			}
-		],
-		"name": "setAdministrator",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_nestSize",
-				"type": "uint256"
-			}
-		],
-		"name": "updateNestSize",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
@@ -829,4 +844,3 @@ const abis = {
 }
 
 module.exports =  abis;
-
