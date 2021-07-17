@@ -24,6 +24,8 @@ contract lockClaim {
  
     mapping(address => lockTime) private durationOflockTimeforPerson;
     
+    mapping(address=>uint256[2]) accountSituation;
+    
     uint256 private counterForClaimablePerson = 0;
     
     mapping(address => bool) private registeredAddresses;
@@ -76,6 +78,11 @@ contract lockClaim {
     function ifTierFull(uint256 nestIndex, uint256 tierIndex) external view returns (uint256) {
          return personCountOnTier[nestIndex][tierIndex];
     }
+    //4
+    function getPersonNest() public view returns(uint256[2] memory) {
+        return accountSituation[msg.sender];
+    }
+    
     
     //4 üstteki 4 metod sırası ile basarılı ise kilitleme metodu cagrılır
     //backendden cagrılan canBeLockable işleminin sonucu basarılı ise backend lock metodunu cagıracaktır. 
@@ -91,16 +98,18 @@ contract lockClaim {
             amount = 15000;
         }
         else if(tierIndex == 2){
-            amount = 20000;
+            amount = 35000;
         }
         else {
-            amount = 30000;
+            amount = 50000;
         }
         
         require(
             _BEP20Token.transferFrom(msg.sender, address(this), amount) == true,
             "transferFrom failed, make sure you approved Ant transfer"
         );
+        accountSituation[msg.sender][0] = nestIndex;
+        accountSituation[msg.sender][1] = tierIndex;
         lockAmountForPerson[msg.sender][nestIndex][tierIndex] = amount; //adrese ait yuvadaki miktar;
         personCountOnTier[nestIndex][tierIndex] = personCountOnTier[nestIndex][tierIndex].add(1);
         counterForClaimablePerson = counterForClaimablePerson.add(1);
@@ -204,6 +213,8 @@ contract lockClaim {
             "claim failed, make sure you approved Ant transfer"
         );
 
+         accountSituation[msg.sender][0] = 0;
+         accountSituation[msg.sender][1] = 0;
          lockAmountForPerson[msg.sender][nestIndexLocal][tierIndexLocal] = 0;
          personCountOnTier[nestIndexLocal][tierIndexLocal] = personCountOnTier[nestIndexLocal][tierIndexLocal].sub(1);
          lockTime storage idoTime = durationOflockTimeforPerson[msg.sender];
