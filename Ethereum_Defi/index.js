@@ -8,7 +8,7 @@ const http = require('http')
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
 var TokenAddress  = "0x228402887dE47eEa68c35511A8d5e18f52fD5Ae3"
 var LockAddress  = "0xCcDD052340B31D64E4ca672Fa67a1efCEe4c4Bac"
-var DistributionAddress = "0xCA576980B1492FC6C276C93Eb6c3253500E9AF9a"
+var DistributionAddress = "0x3Ad0E2e3b24A9416877F61df895bc60b9385D56b"
 
 var bodyParser = require('body-parser')
 
