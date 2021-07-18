@@ -30,6 +30,27 @@ var rawResponseObject;
 var key;
 var value ;
 
+
+app.get('/Time',function(req,res){
+    var _time = Date.now();
+    try{
+      key = ["time"];
+      value = [_time];
+      rawResponseObject = responseMaker.createResponse(key,value);
+      response = responseMaker.responseMaker(rawResponseObject);
+      res.send(response);
+    }
+
+    catch(ex){
+    {
+      errorCode = requestTypeError.AddressSituation;
+      errorMessage =  helper.error(errorCode,err);
+      response = responseMaker.responseErrorMaker(errorCode,errorMessage);
+      res.send(response);
+    } 
+
+})
+
 /*Account yaratmak için rest api url
 *Çağırım : http://ip:port/AddressSituation
 *input : {address:ethereum}
