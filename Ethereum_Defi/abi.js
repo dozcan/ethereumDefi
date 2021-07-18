@@ -741,15 +741,6 @@ var _abiDistribution = [
 	{
 		"constant": false,
 		"inputs": [],
-		"name": "depositUsingVariable",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
 		"name": "setIdoFinish",
 		"outputs": [],
 		"payable": false,
@@ -793,7 +784,12 @@ var _abiDistribution = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_lockCalaimAddress",
+				"name": "_lockClaimAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "contract IBEP20",
+				"name": "_busdTokenAddress",
 				"type": "address"
 			}
 		],
