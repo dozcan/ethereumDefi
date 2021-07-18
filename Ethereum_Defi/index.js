@@ -429,7 +429,7 @@ app.post('/ClaimSecond',function(req,res){
               let body = JSON.stringify(req.body.address);
               let ethereum = JSON.parse(body);
               let personAddress = ethereum.selectedAddress;
-              let result;
+              let result={};
             
               var MyContractToken = new web3.eth.Contract(abis.abiToken, TokenAddress, {
                 from: personAddress, 
