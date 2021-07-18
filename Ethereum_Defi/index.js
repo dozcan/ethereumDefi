@@ -41,7 +41,7 @@ app.get('/Time',function(req,res){
       res.send(response);
     }
 
-    catch(ex){
+    catch(err)
     {
       errorCode = requestTypeError.AddressSituation;
       errorMessage =  helper.error(errorCode,err);
