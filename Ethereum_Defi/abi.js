@@ -793,7 +793,7 @@ var _abiDistribution = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_lockClaimAddress",
+				"name": "_lockCalaimAddress",
 				"type": "address"
 			}
 		],
