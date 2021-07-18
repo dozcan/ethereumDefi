@@ -7,6 +7,8 @@ contract distributionClaim {
     
     using SafeMath for uint256;
     
+    IBEP20 private busdToken;
+    
     address private contractOwner;
     
     uint256 private idoStartTime;
@@ -26,9 +28,10 @@ contract distributionClaim {
         _;
     }
     
-    constructor(address _lockClaimAddress) public {
+    constructor(address _lockClaimAddress,IBEP20 _busdTokenAddress ) public {
          contractOwner = msg.sender;
         _lockClaim = lockClaim(_lockClaimAddress);
+         busdToken = _busdTokenAddress;
     }
     
     function ifAddable() internal view returns (bool){
@@ -120,8 +123,10 @@ contract distributionClaim {
         uint256 nestSize = _lockClaim.getNestSize();
         
         require(result,"need right for claim");//dağıtımı hesapla ve gönderim yap
+        
+        uint256 amountBusd = busdToken.balanceOf(address(this));
        
-        uint256 totalBalance = address(this).balance.div(nestSize);
+        uint256 totalBalance = amountBusd.div(nestSize);
         
         uint256 newTotalBalance = totalBalance.div(375);
         
