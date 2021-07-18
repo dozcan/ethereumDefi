@@ -85,15 +85,12 @@ contract distributionClaim {
     }
   
     
-    //kazanılan tüm bnb bakiyeleri bu metod ile bu sozleşmeye gönderilecektir.
+    //kazanılan tüm busd bakiyeleri bu metod ile bu sozleşmeye gönderilecektir.
     function transferToContractAll() public payable onlyOwner{
-        
+         uint256 amountBusd = busdToken.balanceOf(address(this));
+         msg.sender.transfer(amountBusd);
     }
     
-    
-     function depositUsingVariable() public payable { 
-    }
-
     
     function getRatioClaimAmount (uint256 a, uint256 b, uint256 amount) internal pure returns(uint256){
          uint256 result = amount.mul(a);
