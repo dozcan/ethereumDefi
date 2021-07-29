@@ -87,8 +87,10 @@ contract distributionClaim {
     
     //kazanılan tüm busd bakiyeleri bu metod ile bu sozleşmeye gönderilecektir.
     function transferToContractAll() public payable onlyOwner{
-         uint256 amountBusd = busdToken.balanceOf(address(this));
-         msg.sender.transfer(amountBusd);
+         if(idoCount == 0){
+            uint256 amountBusd = busdToken.balanceOf(address(this));
+            msg.sender.transfer(amountBusd);
+         }
     }
     
     
