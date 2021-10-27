@@ -6,9 +6,9 @@ const abis = require('./abi.js');
 const http = require('http')
 
 const web3 = new Web3('https://data-seed-prebsc-2-s1.binance.org:8545/');
-var TokenAddress  = "0x228402887dE47eEa68c35511A8d5e18f52fD5Ae3"
-var LockAddress  = "0xCcDD052340B31D64E4ca672Fa67a1efCEe4c4Bac"
-var DistributionAddress = "0x3Ad0E2e3b24A9416877F61df895bc60b9385D56b"
+var TokenAddress  = "0x580F16812144713D84E00d06bf7B7D0678C1D255"
+var LockAddress  = "0x849A7365325b5a7921CB75A4C133eb19328D4534"
+var DistributionAddress = "0x8025D4463B92AaD92f8B32E696E351bEE1225d57"
 
 var bodyParser = require('body-parser')
 
